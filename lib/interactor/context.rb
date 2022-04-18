@@ -125,6 +125,12 @@ module Interactor
       @failure = true
       raise Failure, self
     end
+    
+    # The same method as .fail! but without exception
+    def fail(context = {})
+      context.each { |key, value| self[key.to_sym] = value }
+      @failure = true
+    end
 
     # Internal: Track that an Interactor has been called. The "called!" method
     # is used by the interactor being invoked with this context. After an
